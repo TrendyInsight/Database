@@ -13,12 +13,11 @@ class FashionApp:
         self.cursor.executescript(sqlscript)
         self.conn.commit()  # Simpan perubahan ke database
 
-
-    def save_jenis_baju(self, id_jenis, atasan, bawahan, kerudung, gamis): 
+    def save_gambar(self, id_gambar, path_gambar): 
         try: 
             self.cursor.execute
-            ("INSERT INTO jenis_baju (id_jenis, atasan, bawahan, kerudung, gamis) VALUES (?, ?, ?, ?, ?)", 
-             (id_jenis, atasan, bawahan, kerudung, gamis)
+            ("INSERT INTO rekomendasi (id_gambar, path_gambar) VALUES (?, ?)", 
+             (id_gambar, path_gambar)
             )
             self.conn.commit()
             return True
@@ -26,11 +25,11 @@ class FashionApp:
             print("Error:", str(e))
             return False
 
-    def save_rekomendasi(self, id_rekom, rating, warna, foto_rek): 
+    def save_jenis(self, id_jenis, atasan, bawahan, terusan): 
         try: 
             self.cursor.execute
-            ("INSERT INTO rekomendasi (id_rekom, rating, warna, foto_rek) VALUES (?, ?, ?, ?)", 
-             (id_rekom, rating, warna, foto_rek)
+            ("INSERT INTO jenis_baju (id_jenis, atasan, bawahan, terusan) VALUES (?, ?, ?, ?)", 
+             (id_jenis, atasan, bawahan, terusan)
             )
             self.conn.commit()
             return True
@@ -38,11 +37,12 @@ class FashionApp:
             print("Error:", str(e))
             return False
 
-    def save_outfit(self, id_outfit, foto, date): 
+
+    def save_outfit(self, id_outfit, id_jenis, id_gambar, nama_obyek, rating, alasan, tanggal, jam): 
         try: 
             self.cursor.execute
-            ("INSERT INTO outfit (id_outfit, foto, date) VALUES (?, ?, ?)", 
-             (id_outfit, foto, date)
+            ("INSERT INTO outfit (id_outfit, id_jenis, id_gambar, nama_obyek, rating, alasan, tanggal, jam) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+             (id_outfit, id_jenis, id_gambar, nama_obyek, rating, alasan, tanggal, jam)
             )
             self.conn.commit()
             return True

@@ -1,29 +1,31 @@
--- Buat database
-CREATE DATABASE IF NOT EXISTS trendy;
-USE trendy;
+-- Buat database jika belum ada
+CREATE DATABASE IF NOT EXISTS fashion;
+USE fashion;
 
--- Tabel jenis_baju
-CREATE TABLE IF NOT EXISTS jenis_baju (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	atasan VARCHAR(20),
+-- Table Gambar
+CREATE TABLE IF NOT EXISTS gambar (
+    id_gambar INTEGER PRIMARY KEY AUTO_INCREMENT,
+    path_gambar VARCHAR(250)
+);
+
+-- Table Jenis
+CREATE TABLE IF NOT EXISTS jenis (
+    id_jenis INTEGER PRIMARY KEY AUTO_INCREMENT,
+    atasan VARCHAR(20),
     bawahan VARCHAR(20),
-	kerudung VARCHAR(20),
-	gamis VARCHAR(20)
+	terusan VARCHAR(20),
 );
 
--- Tabel outfit
+-- Table Outfit
 CREATE TABLE IF NOT EXISTS outfit (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	foto BLOB,
-	tanggal CURRENT_TIMESTAMP,
+    id_outfit INTEGER PRIMARY KEY AUTO_INCREMENT,
     id_jenis INTEGER,
-    FOREIGN KEY (id_jenis) REFERENCES jenis_baju (id),
-);
-
--- Tabel rekomendasi
-CREATE TABLE IF NOT EXISTS rekomendasi (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	rating VARCHAR(20),
-    warna VARCHAR(20),
-	foto_rek VARCHAR(20)
+    id_gambar INTEGER,
+    nama_obyek VARCHAR(50),
+    rating VARCHAR(20),
+    alasan VARCHAR(100),
+    tanggal DATE(),
+    jam TIMESTAMP(6),
+    FOREIGN KEY (id_jenis) REFERENCES jenis (id_jenis),
+        FOREIGN KEY (id_gambar) REFERENCES gambar (id_gambar)
 );
